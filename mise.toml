@@ -1,0 +1,20 @@
+[tasks.dev]
+description = "Run the development server"
+run = "pnpm dev"
+
+
+[tasks.commit]
+description = "Commit changes with a lazy commit message"
+run = "git commit  -m $(lazycommit commit)"
+
+[tools]
+pnpm = "12.3.4"
+
+[env]
+HOST = "localhost"
+PORT = "3000"
+NODE_ENV = "development"
+
+[hooks]
+enter = "git status --short"
+postinstall = "npm install"
