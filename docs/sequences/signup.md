@@ -2,35 +2,27 @@
 sequenceDiagram
     title: tache — gestão de tarefas
     autonumber
-    participant Local as Client Host
-    actor User
-    participant CLI as Command Line
+    actor Client
     participant API as API Gateway
     participant DB@{ "type" : "database" } as Database
     participant Email as Serviço de email
 
-    User ->> CLI: tache signup
-    activate CLI
-    CLI ->> CLI: validar dados
-    CLI ->> API: enviar dados do user
+    Client ->> API: BODY: user data(email, password, name...)
     activate API
-    API ->> API: validar dados
-    API ->> DB: consultar os dados na DB
+    API ->> API: validate data
+    API ->> DB:  check user's data in database
+    API ->> DB: query database for <unique> user data
     activate DB
-    alt dados encontrados
-        DB -->> API: dados persistidos
-    else dados não encontrados
-        DB -->> API: erro — dados não encontrados
+    alt try_register_user
+        DB -->> API: persisted data
+    else error
+        DB -->> API: return a specific error
     end
     deactivate DB
-    alt dados persistidos
-        API -->> CLI: erro - dados ja existem
-    else dados nao encontrados
-        API ->> API: criar um user com esses dados
-        API ->> DB: registar dados de user na DB
-        API -->> CLI: user registados com sucesso
+    alt user_registered
+        API -->> CLI: user registered with success
+    else error
+        API -->> Client: response with a specific error
     end
     deactivate API
-    CLI -->> User: apresentar resultado
-    deactivate CLI
 ```
