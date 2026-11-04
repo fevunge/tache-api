@@ -38,13 +38,23 @@ Copy the environment template and configure the application:
 cp env.example .env
 ```
 
-The application configuration uses:
+The application configuration uses these variables. `NODE_ENV`, `PORT`, and
+`DATABASE_URL` are required and validated when the application starts:
 
 | Variable | Description |
 | --- | --- |
-| `PORT` | HTTP port |
-| `DATABASE_URL` | PostgreSQL connection string |
-| `NODE_ENV` | Runtime environment |
+| `NODE_ENV` | `development`, `test`, or `production` |
+| `PORT` | HTTP port from 1 to 65535 |
+| `DATABASE_URL` | PostgreSQL connection string using `postgres://` or `postgresql://` |
+
+Ollama variables are optional and reserved for V2. If either model is set,
+`OLLAMA_URL` must also be set:
+
+| Variable | Description |
+| --- | --- |
+| `OLLAMA_URL` | Ollama HTTP URL |
+| `OLLAMA_MODEL` | Text-generation model |
+| `OLLAMA_EMBED_MODEL` | Embedding model |
 
 The Compose file accepts these database variables:
 
@@ -55,6 +65,10 @@ The Compose file accepts these database variables:
 | `POSTGRES_PASSWORD` | `postgres` |
 | `POSTGRES_PORT` | `5432` |
 
+The environment parser in `src/config/env.ts` validates these values and throws
+a descriptive error before the application can start when configuration is
+missing or malformed.
+
 ## Commands
 
 ```bash
@@ -63,7 +77,6 @@ pnpm build      # Compile TypeScript to dist/
 pnpm start      # Run the compiled API
 pnpm typecheck  # Run TypeScript without emitting files
 pnpm test       # Run Vitest once
-pnpm lint       # Check formatting and lint rules with Biome
 ```
 
 ## PostgreSQL
