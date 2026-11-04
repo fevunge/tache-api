@@ -10,17 +10,16 @@ sequenceDiagram
     Client ->> API: BODY: user data(email, password, name...)
     activate API
     API ->> API: validate data
-    API ->> DB:  check user's data in database
-    API ->> DB: query database for <unique> user data
+    API ->> DB:  insert user data to DB
     activate DB
-    alt try_register_user
-        DB -->> API: persisted data
+    alt user_inserted
+        DB -->> API: persisted data successfully
     else error
         DB -->> API: return a specific error
     end
     deactivate DB
     alt user_registered
-        API -->> CLI: user registered with success
+        API -->> Client: user registered with success
     else error
         API -->> Client: response with a specific error
     end
