@@ -5,11 +5,19 @@ sequenceDiagram
     actor Client
     participant API as API Gateway
     participant DB@{ "type" : "database" } as Database
-    participant Email as Serviço de email
+    participant EMAIL as Email Service
 
     Client ->> API: BODY: user data(email, password, name...)
     activate API
     API ->> API: validate data
+    API ->> EMAIL: send a OTP to user email
+    API ->> Client: wait for user to confirm the OTP until expires
+    alt otp_confirmed
+        Client ->> API: send the OTP to confirm
+        API ->> API: validate the OTP
+    else otp_expired
+        API -->> API: Cancel the registration process and return
+    end
     API ->> DB:  insert user data to DB
     activate DB
     alt user_inserted
