@@ -14,13 +14,27 @@ run = "pnpm start"
 description = "Clean the build artifacts"
 run = "rm -rf dist"
 
+[tasks.test]
+description = "Run the test suite"
+run = "pnpm test"
+
+[tasks.lint]
+description = "Run the linter"
+run = "pnpm lint"
+
+[tasks.env]
+description = "Set environment variables"
+run = """
+if [ -f .env ]; then
+  echo "Loading environment variables from .env file"
+  export $(grep -v '^#' .env | xargs)
+else
+  echo ".env file not found"
+fi
+"""
+
 [tools]
 pnpm = "12.3.4"
-
-[env]
-HOST = "localhost"
-PORT = "3000"
-NODE_ENV = "development"
 
 [hooks]
 enter = "git status --short"
