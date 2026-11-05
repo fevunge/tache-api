@@ -4,6 +4,7 @@ erDiagram
  USER {
   int userID PK ""
   string email UK ""
+  string username UK ""
   string firstName  ""
   string lastName  ""
   string phone  ""
@@ -30,19 +31,23 @@ erDiagram
   string status  ""
   datetime startDate  ""
   datetime endDate  ""
-  string repository  ""
+  string localRepository  ""
+  string remoteRepository  ""
   datetime createdAt  ""
   datetime updatedAt  ""
  }
 
+TASK {
+  int taskID PK ""
+  string title  ""
+  string description  ""
+  int projectID FK ""
+  string status  ""
+  datetime dueDate  ""
+  datetime createdAt  ""
+  datetime updatedAt  ""
+ }
 
- USER}|--o{PROJECT:"has"
- USER||--o{ORDER:"places"
- USER||--o{INVOICE:"liable for"
- PROJECT||--o{ORDER:"receives"
- INVOICE||--|{ORDER:"covers"
- ORDER||--|{ORDER-ITEM:"includes"
- PRODUCT-CATEGORY||--|{PRODUCT:"contains"
- PRODUCT||--o{ORDER-ITEM:"ordered in"
- USER}|--|{Untitled-Entity:"  "
+USER ||--o{ PROJECT : "creates"
+PROJECT ||--o{ TASK : "contains"
 ```
