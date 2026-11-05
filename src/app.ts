@@ -1,7 +1,7 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { registerAuthRoutes } from "./adapters/http/auth.js";
-import { InMemoryUserRepository } from "./adapters/memory/user-repository.js";
-import { signup } from "./application/auth/signup.js";
+import { registerAuthRoutes } from "@adapters/http/auth.js";
+import { InMemoryUserRepository } from "@adapters/memory/user-repository.js";
+import { signup } from "@application/auth/signup.js";
 
 export const createApp = (): OpenAPIHono => {
   const app = new OpenAPIHono();
