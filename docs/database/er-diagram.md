@@ -2,7 +2,7 @@
 erDiagram
  direction TB
  USER {
-  int userID PK ""
+  uuid userID PK ""
   string email UK ""
   string username UK ""
   string firstName  ""
@@ -24,11 +24,13 @@ erDiagram
  }
 
  PROJECT {
-  int projectID PK ""
+  uuid projectID PK ""
   string name UK ""
   string description  ""
-  int userID FK ""
+  uuid userID FK ""
   string status  ""
+  string visibility  ""
+  string[] tags  ""
   datetime startDate  ""
   datetime endDate  ""
   string localRepository  ""
@@ -38,11 +40,14 @@ erDiagram
  }
 
 TASK {
-  int taskID PK ""
+  uuid taskID PK ""
   string title  ""
   string description  ""
-  int projectID FK ""
+  uuid projectID FK ""
   string status  ""
+  string priority  ""
+  string[] tags  ""
+  uuid assignedTo FK ""
   datetime dueDate  ""
   datetime createdAt  ""
   datetime updatedAt  ""
