@@ -7,10 +7,10 @@ Suggested pace: 1 phase per half-day to day. Skip nothing; later phases assume e
 
 ## Phase 0 — Setup
 
-- [ ] T0.1 `[AGENT]` Init project: pnpm, TS strict, ESM, Vitest, scripts from AGENTS.md
-- [ ] T0.2 `[AGENT]` `docker-compose.yml` with PostgreSQL (dev + `tache_test` database)
+- [x] T0.1 `[AGENT]` Init project: pnpm, TS strict, ESM, Vitest, scripts from AGENTS.md
+- [x] T0.2 `[AGENT]` `docker-compose.yml` with PostgreSQL (dev + `tache_test` database)
 - [x] T0.3 `[AGENT]` `src/config`: env parsing with Zod, fail fast on bad config
-- [ ] T0.4 `[AGENT]` Hono app with `GET /health` + integration test via `app.request`
+- [x] T0.4 `[AGENT]` Hono app with `GET /health` + integration test via `app.request`
 
 ## Phase 1 — Domain and use cases (no HTTP, no DB yet)
 
