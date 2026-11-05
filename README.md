@@ -41,29 +41,29 @@ cp env.example .env
 The application configuration uses these variables. `NODE_ENV`, `PORT`, and
 `DATABASE_URL` are required and validated when the application starts:
 
-| Variable | Description |
-| --- | --- |
-| `NODE_ENV` | `development`, `test`, or `production` |
-| `PORT` | HTTP port from 1 to 65535 |
+| Variable       | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| `NODE_ENV`     | `development`, `test`, or `production`                              |
+| `PORT`         | HTTP port from 1 to 65535                                           |
 | `DATABASE_URL` | PostgreSQL connection string using `postgres://` or `postgresql://` |
 
 Ollama variables are optional and reserved for V2. If either model is set,
 `OLLAMA_URL` must also be set:
 
-| Variable | Description |
-| --- | --- |
-| `OLLAMA_URL` | Ollama HTTP URL |
-| `OLLAMA_MODEL` | Text-generation model |
-| `OLLAMA_EMBED_MODEL` | Embedding model |
+| Variable             | Description           |
+| -------------------- | --------------------- |
+| `OLLAMA_URL`         | Ollama HTTP URL       |
+| `OLLAMA_MODEL`       | Text-generation model |
+| `OLLAMA_EMBED_MODEL` | Embedding model       |
 
 The Compose file accepts these database variables:
 
-| Variable | Default |
-| --- | --- |
-| `POSTGRES_DB` | `tache` |
-| `POSTGRES_USER` | `postgres` |
+| Variable            | Default    |
+| ------------------- | ---------- |
+| `POSTGRES_DB`       | `tache`    |
+| `POSTGRES_USER`     | `postgres` |
 | `POSTGRES_PASSWORD` | `postgres` |
-| `POSTGRES_PORT` | `5432` |
+| `POSTGRES_PORT`     | `5432`     |
 
 The environment parser in `src/config/env.ts` validates these values and throws
 a descriptive error before the application can start when configuration is
@@ -131,3 +131,8 @@ V1 covers task management, API-key authentication, OpenAPI documentation, and
 PostgreSQL persistence. V2 adds optional local Ollama features for priority
 suggestions and duplicate detection. CLI, web UI, teams, sharing, JWT/OAuth,
 and deployment are outside the project scope.
+
+## Dcoumentation
+
+- [Mermaid](https://mermaid.js.org/)
+- [Hono/Zod](https://www.freecodecamp.org/news/how-to-build-type-safe-apis-with-hono-and-zod/#heading-1-the-drift-problem)
