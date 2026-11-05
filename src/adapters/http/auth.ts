@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono } from "@hono/zod-openapi";
-import { signup } from "../../application/auth/signup.js";
-import { signupInputSchema, userSchema } from "../../domain/user/user-schema.js";
+import { signup } from "@application/auth/signup.js";
+import { publicUserSchema, signupInputSchema } from "@domain/user/user-schema.js";
 
 const signupRoute = createRoute({
   method: "post",
@@ -22,7 +22,7 @@ const signupRoute = createRoute({
       description: "User account created",
       content: {
         "application/json": {
-          schema: userSchema,
+          schema: publicUserSchema,
         },
       },
     },
