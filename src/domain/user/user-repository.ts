@@ -1,5 +1,5 @@
-import type { SignupInput, User } from "./user-schema.js";
+import type { PublicUser, SignupInput } from "./user-schema.js";
 
 export interface UserRepository {
-  create(input: SignupInput): Promise<User>;
+  create(input: SignupInput): Promise<PublicUser>;
 }

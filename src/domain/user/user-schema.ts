@@ -1,5 +1,27 @@
 import { z } from "@hono/zod-openapi";
 
+export const userSchema = z.object({
+  userID: z.uuid(),
+  email: z.email(),
+  username: z.string(),
+  firstName: z.string().nullable(),
+  lastName: z.string().nullable(),
+  phone: z.string().nullable(),
+  jobTitle: z.string().nullable(),
+  role: z.string().nullable(),
+  department: z.string().nullable(),
+  linuxUsername: z.string().nullable(),
+  githubUsername: z.string().nullable(),
+  developmentEnv: z.string().nullable(),
+  otpHash: z.string().nullable(),
+  passwordHash: z.string(),
+  lastLogin: z.iso.datetime().nullable(),
+  createdAt: z.iso.datetime(),
+  updatedAt: z.iso.datetime(),
+});
+
+export const publicUserSchema = userSchema.omit({ passwordHash: true });
+
 export const signupInputSchema = z.object({
   username: z.string().trim().min(1),
   email: z.email(),
@@ -13,20 +35,17 @@ export const signupInputSchema = z.object({
   githubUsername: z.string().trim().min(1).optional(),
 });
 
-export const userSchema = z.object({
-  id: z.uuid(),
-  username: z.string(),
-  email: z.email(),
-  phone: z.string().nullable(),
-  firstName: z.string().nullable(),
-  lastName: z.string().nullable(),
-  role: z.string().nullable(),
-  department: z.string().nullable(),
-  linuxUsername: z.string().nullable(),
-  githubUsername: z.string().nullable(),
-  createdAt: z.iso.datetime(),
-  updatedAt: z.iso.datetime(),
+export const updateUserInputSchema = userSchema.partial().omit({
+  userID: true,
+  email: true,
+  otpHash: true,
+  passwordHash: true,
+  lastLogin: true,
+  createdAt: true,
+  updatedAt: true,
 });
 
-export type SignupInput = z.infer<typeof signupInputSchema>;
 export type User = z.infer<typeof userSchema>;
+export type PublicUser = z.infer<typeof publicUserSchema>;
+export type SignupInput = z.infer<typeof signupInputSchema>;
+export type UpdateUserInput = z.infer<typeof updateUserInputSchema>;
